@@ -1,4 +1,4 @@
-jmespath==1.0.1
+jmespath==0.10.0
 nested-lookup==0.2.25
 pytz==2024.2
 apscheduler==3.11.0
