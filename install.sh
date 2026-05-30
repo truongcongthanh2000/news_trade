@@ -16,23 +16,22 @@ echo Installing pip
 sudo apt install python3-pip -y
 
 echo "Installing Node.js (for PM2)..."
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
-nvm install 20
-nvm use 20
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs
 
 echo "Installing PM2 globally..."
 sudo npm install -g pm2
 
-echo Install browser chromium headless mode
-playwright install --only-shell chromium
-
-echo Installing playwright chromium dependencies
-playwright install-deps chromium
-
-echo Installing virtual environment 
+echo "Installing virtual environment..."
 sudo apt-get install python3-venv -y
 python3 -m venv .venv
 source .venv/bin/activate
 
-echo Install all packages
+echo "Installing pip packages..."
 pip3 install -r requirements.txt
+
+echo "Installing browser chromium headless mode..."
+.venv/bin/playwright install --only-shell chromium
+
+echo "Installing playwright chromium dependencies..."
+.venv/bin/playwright install-deps chromium
