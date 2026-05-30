@@ -1,5 +1,5 @@
 jmespath==0.10.0
-nested-lookup==0.2.25
+nested-lookup==0.2.23
 pytz==2024.2
 apscheduler==3.11.0
 twikit==2.3.1
