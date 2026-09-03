@@ -7,12 +7,20 @@ module.exports = {
         "-c",
         `
         touch /tmp/tor.log /tmp/tor-error.log /tmp/crypto_trading_news.log /tmp/crypto_trading_news-error.log
-        sudo rm -f /var/lib/tor/state
+        sudo systemctl stop tor 2>/dev/null || true
+        
+        DATA_DIR="/tmp/tor-multi-data"
+        mkdir -p "$DATA_DIR"
+        chmod 700 "$DATA_DIR"
+        rm -f "$DATA_DIR/state"
+
         TORRC=/tmp/torrc-multi
         rm -f $TORRC
 
         NUM_PORTS="\${NUM_PORTS:-1}"
         MAX_CIRCUIT="\${MAX_CIRCUIT:-600}"
+
+        echo "DataDirectory $DATA_DIR" >> $TORRC
 
         echo "[*] Generating torrc with $NUM_PORTS SocksPorts..."
         for ((i=0; i<$NUM_PORTS; i++)); do

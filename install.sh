@@ -11,6 +11,9 @@ EOF
 curl -fsSL https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | sudo gpg --dearmor | sudo tee /usr/share/keyrings/deb.torproject.org-keyring.gpg >/dev/null
 sudo apt update
 sudo apt install tor deb.torproject.org-keyring -y
+sudo systemctl stop tor
+sudo systemctl disable tor
+sudo systemctl mask tor
 
 echo Installing pip
 sudo apt install python3-pip -y
